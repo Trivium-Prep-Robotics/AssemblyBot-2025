@@ -26,7 +26,7 @@ public class teleOpTemplate extends LinearOpMode {
 
         while (opModeIsActive()) {
             left.setPower(gamepad1.left_stick_y);
-            right.setPower(gamepad1.left_stick_y);
+            right.setPower(gamepad1.right_stick_y);
 
             if (gamepad1.a) {
                 shoot.setPower(1);
