@@ -11,6 +11,8 @@ public class teleOpTemplate extends LinearOpMode {
     public static DcMotor right, left;
     public static DcMotor shoot;
 
+    double speed = 0.5;
+
     public void runOpMode() throws InterruptedException {
         right = hardwareMap.get(DcMotor.class, "right");
         left = hardwareMap.get(DcMotor.class, "left");
@@ -22,16 +24,17 @@ public class teleOpTemplate extends LinearOpMode {
         left.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         shoot = hardwareMap.get(DcMotor.class, "shoot");
+        shoot.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         waitForStart(); // initialize
 
         while (opModeIsActive()) {
-            left.setPower(gamepad1.left_stick_y);
-            right.setPower(gamepad1.left_stick_y);
+            left.setPower(gamepad1.left_stick_y * speed);
+            right.setPower(gamepad1.right_stick_y * speed);
 
             if (gamepad1.a) {
-                shoot.setPower(1);
+                shoot.setPower(speed);
             } else if (gamepad1.b) {
-                shoot.setPower(-1);
+                shoot.setPower(-speed);
             } else {
                 shoot.setPower(0);
             }
